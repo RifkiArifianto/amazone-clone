@@ -10,7 +10,7 @@ import data from "@/lib/data";
 export default function Header() {
   return (
     <header className="bg-black text-white">
-      <div className="px-2">
+      <div>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link
