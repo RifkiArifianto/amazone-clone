@@ -43,3 +43,29 @@ export const ProductInputSchema = z.object({
     .int()
     .nonnegative("Nomer sales harus berupa angka positif."),
 });
+
+// Order Item
+export const OrderItemSchema = z.object({
+  clientId: z.string().min(1, "ClientId harus diisi"),
+  product: z.string().min(1, "Product harus diisi"),
+  name: z.string().min(1, "Name harus diisi"),
+  slug: z.string().min(1, "Slug harus diisi"),
+  category: z.string().min(1, "Category harus diisi"),
+  quantity: z.number().int().nonnegative("Quantity harus positif"),
+  countInStock: z.number().int().nonnegative("CountInStock harus positif"),
+  image: z.string().min(1, "Image harus diisi"),
+  price: Price("Harga"),
+  size: z.string().optional(),
+  color: z.string().optional(),
+});
+
+export const CartSchema = z.object({
+  items: z.array(OrderItemSchema).min(1, "Order harus diisi minimal 1 item"),
+  itemsPrice: z.number(),
+  taxPrice: z.optional(z.number()),
+  shippingPrice: z.optional(z.number()),
+  totalPrice: z.number(),
+  paymentMethod: z.optional(z.string()),
+  deliveryDateIndex: z.optional(z.number()),
+  expectedDeliveryDate: z.optional(z.date()),
+});
