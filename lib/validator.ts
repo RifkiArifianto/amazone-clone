@@ -69,3 +69,36 @@ export const CartSchema = z.object({
   deliveryDateIndex: z.optional(z.number()),
   expectedDeliveryDate: z.optional(z.date()),
 });
+
+// USER
+const UserName = z
+  .string()
+  .min(2, { message: "Username harus minimal 2 karakter" })
+  .max(50, { message: "Username maksimal 50 karakter" });
+const Email = z.string().min(1, "Email harus diisi").email("Email harus valid");
+const Password = z.string().min(3, "Password harus minimal 3 karakter");
+const UserRole = z.string().min(1, "Role harus diisi");
+
+export const UserInputSchema = z.object({
+  name: UserName,
+  email: Email,
+  image: z.string().optional(),
+  emailVerified: z.boolean(),
+  role: UserRole,
+  password: Password,
+  paymentMethod: z.string().min(1, "Payment method harus diisi"),
+  address: z.object({
+    fullName: z.string().min(1, "Full name harus diisi"),
+    street: z.string().min(1, "Street harus diisi"),
+    city: z.string().min(1, "City harus diisi"),
+    province: z.string().min(1, "Province harus diisi"),
+    postalCode: z.string().min(1, "Postal code harus diisi"),
+    country: z.string().min(1, "Country harus diisi"),
+    phone: z.string().min(1, "Phone harus diisi"),
+  }),
+});
+
+export const UserSignInSchema = z.object({
+  email: Email,
+  password: Password,
+});
