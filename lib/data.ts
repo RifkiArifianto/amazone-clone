@@ -1,5 +1,60 @@
-import { Data, IProductInput } from "@/types";
+import { Data, IProductInput, IUserInput } from "@/types";
 import { toSlug } from "./utils";
+import bcrypt from "bcryptjs";
+
+const users: IUserInput[] = [
+  {
+    name: "John",
+    email: "admin@example.com",
+    password: bcrypt.hashSync("123456", 5),
+    role: "Admin",
+    address: {
+      fullName: "John Doe",
+      street: "123 Main St",
+      city: "Anytown",
+      province: "CA",
+      postalCode: "12345",
+      country: "USA",
+      phone: "555-555-5555",
+    },
+    paymentMethod: "Stripe",
+    emailVerified: false,
+  },
+  {
+    name: "Jane",
+    email: "jane@example.com",
+    password: bcrypt.hashSync("123456", 5),
+    role: "User",
+    address: {
+      fullName: "Jane Doe",
+      street: "123 Main St",
+      city: "Anytown",
+      province: "CA",
+      postalCode: "12345",
+      country: "USA",
+      phone: "555-555-5555",
+    },
+    paymentMethod: "Cash on Delivery",
+    emailVerified: false,
+  },
+  {
+    name: "Jack",
+    email: "jack@example.com",
+    password: bcrypt.hashSync("123456", 5),
+    role: "User",
+    address: {
+      fullName: "Jack Doe",
+      street: "123 Main St",
+      city: "Anytown",
+      province: "CA",
+      postalCode: "12345",
+      country: "USA",
+      phone: "555-555-5555",
+    },
+    paymentMethod: "Cash on Delivery",
+    emailVerified: false,
+  },
+];
 
 const products: IProductInput[] = [
   {
@@ -708,6 +763,7 @@ const products: IProductInput[] = [
 ];
 
 const data: Data = {
+  users,
   products,
   headerMenus: [
     {
